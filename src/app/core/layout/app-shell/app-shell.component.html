@@ -1,0 +1,77 @@
+<div class="shell" [class.nav-open]="navOpen()">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><app-icon [name]="cfg.logoIcon" [size]="20" /></div>
+      <div class="brand-text">
+        <strong>{{ cfg.productName }}</strong>
+        @if (tenant()) {
+          <span class="tenant mono">tenant: {{ tenant() }}</span>
+        }
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Navegação principal">
+      @for (section of sections(); track $index) {
+        @if (section.label) {
+          <span class="nav-label">{{ section.label }}</span>
+        }
+        @for (item of section.items; track item.path) {
+          @if (item.disabled) {
+            <span class="nav-link disabled" aria-disabled="true">
+              <app-icon [name]="item.icon" />
+              {{ item.label }}
+              <span class="nav-soon">Em breve</span>
+            </span>
+          } @else {
+            <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" (click)="closeNav()">
+              <app-icon [name]="item.icon" />
+              {{ item.label }}
+              @if (item.badge) {
+                <span class="nav-badge">{{ item.badge }}</span>
+              }
+            </a>
+          }
+        }
+      }
+    </nav>
+
+    @if (user(); as u) {
+      <div class="user">
+        <div class="avatar">{{ initials() }}</div>
+        <div class="user-info">
+          <span class="user-name">{{ u.name }}</span>
+          <span class="user-role">{{ roleLabel() }}</span>
+        </div>
+        <button class="icon-btn" type="button" title="Sair" aria-label="Sair" (click)="logout()">
+          <app-icon name="log-out" [size]="16" />
+        </button>
+      </div>
+    }
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn" type="button" aria-label="Abrir menu" (click)="toggleNav()">
+        <app-icon name="menu" />
+      </button>
+      <strong>{{ cfg.productName }}</strong>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+
+    @if (cfg.footerEnabled) {
+      <footer class="footer">
+        <span>{{ cfg.footerText }}</span>
+        <span class="mono">{{ cfg.tagline }}</span>
+      </footer>
+    }
+  </div>
+
+  @if (navOpen()) {
+    <div class="backdrop" (click)="closeNav()"></div>
+  }
+</div>
+
+<app-toast-container />

@@ -1,0 +1,44 @@
+<app-page-header
+  eyebrow="Visão geral"
+  title="Dashboard"
+  [subtitle]="'Página de exemplo do ' + product + '. Substitua pelo conteúdo da sua aplicação.'"
+>
+  <button class="btn" type="button" (click)="notify()">Exportar</button>
+  <button class="btn btn-primary" type="button" (click)="notify()">
+    <app-icon name="plus" [size]="16" /> Nova ação
+  </button>
+</app-page-header>
+
+<section class="grid-kpi" aria-label="Indicadores">
+  <app-kpi-card label="Itens ativos" [value]="'4.812'" icon="activity" trend="+3,2%" hint="no mês" />
+  <app-kpi-card label="Usuários" [value]="'1.264'" icon="users" hint="sincronizados" tone="success" />
+  <app-kpi-card label="Pendências" [value]="5" icon="clock" hint="SLA médio de 4h" tone="warning" />
+  <app-kpi-card label="Alertas críticos" [value]="0" icon="alert" hint="nenhum aberto" tone="danger" />
+</section>
+
+<div class="grid-2" style="margin-bottom: 24px">
+  <section class="card">
+    <h2 class="card-title">Contador regressivo (exemplo)</h2>
+    <app-countdown [until]="sampleExpiry" />
+    <p class="muted" style="margin-top: 8px">Ideal para acessos temporários, sessões e prazos.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="card-title">Estado vazio (exemplo)</h2>
+    <app-empty-state
+      title="Nada por aqui ainda"
+      description="Use este componente quando uma lista não tiver registros."
+      icon="inbox"
+    />
+  </section>
+</div>
+
+<h2 class="section-title">Atividade recente</h2>
+<app-data-table [columns]="columns" [rows]="rows">
+  <ng-template appCell="type" let-row>
+    <app-status-badge [tone]="row.type === 'ESPECIAL' ? 'purple' : 'info'">{{ row.type }}</app-status-badge>
+  </ng-template>
+  <ng-template appCell="status" let-row>
+    <app-status-badge [tone]="toneFor(row.status)">{{ row.status }}</app-status-badge>
+  </ng-template>
+</app-data-table>

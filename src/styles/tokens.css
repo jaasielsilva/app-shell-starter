@@ -1,0 +1,56 @@
+/*
+ * Tokens de tema — é o ÚNICO arquivo que precisa mudar para trocar a identidade visual.
+ * Base: paleta do saas-monitor (dark corporativo, slate + azul).
+ * Para criar um tema novo, copie o bloco :root[data-theme='mint'] e ajuste as cores;
+ * depois selecione-o em core/config/shell.config.ts (campo `theme`).
+ */
+:root {
+  color-scheme: dark;
+
+  /* superfícies */
+  --bg-primary: #0b111b;
+  --bg-secondary: #111827;
+  --bg-card: #151c2c;
+  --bg-card-hover: #1a2332;
+  --border: #1e2a3a;
+  --border-light: #253044;
+
+  /* texto */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* cor de destaque (primary) */
+  --accent: #3b82f6;
+  --accent-fg: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+
+  /* semânticas */
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+  --purple: #a855f7;
+
+  /* layout */
+  --sidebar-width: 240px;
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  /* tipografia */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+}
+
+/* Tema alternativo: verde-água, fundo mais escuro (estilo IAM/segurança) */
+:root[data-theme='mint'] {
+  --bg-primary: #080d14;
+  --bg-secondary: #0c131c;
+  --bg-card: #101823;
+  --bg-card-hover: #152030;
+  --border: #1a2634;
+  --border-light: #233246;
+  --accent: #2dd4bf;
+  --accent-fg: #04201c;
+  --info: #38bdf8;
+}
